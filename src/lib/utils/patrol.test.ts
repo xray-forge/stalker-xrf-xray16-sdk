@@ -70,3 +70,14 @@ describe("getPatrolFlag", () => {
     expect(getPatrolFlag(path, 2)).toBeNull();
   });
 });
+
+describe("MockPatrol.register", () => {
+  it("should add a patrol without replacing previously configured patrols", () => {
+    MockPatrol.register("additional-wp", {
+      points: [{ name: "wp0", gvid: 1, lvid: 2, position: MockVector.create(1, 2, 3) }],
+    });
+
+    expect(MockPatrol.has("test-wp")).toBe(true);
+    expect(MockPatrol.mock("additional-wp").point(0)).toEqual(MockVector.create(1, 2, 3));
+  });
+});

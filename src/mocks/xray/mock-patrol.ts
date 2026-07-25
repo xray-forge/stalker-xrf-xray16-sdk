@@ -27,6 +27,16 @@ export class MockPatrol implements patrol {
     MockPatrol.registry = patrols;
   }
 
+  /**
+   * Register or replace one named patrol mock without discarding the existing registry.
+   *
+   * @param name - Name resolved by the mocked `patrol` constructor.
+   * @param patrol - Patrol point data to register.
+   */
+  public static register(name: string, patrol: IPatrolMock): void {
+    MockPatrol.registry[name] = patrol;
+  }
+
   public static mock(name: string): patrol {
     return new MockPatrol(name);
   }

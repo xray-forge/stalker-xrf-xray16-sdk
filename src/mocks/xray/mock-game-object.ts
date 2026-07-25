@@ -37,6 +37,7 @@ export interface IMockGameObjectConfig {
   rank?: number;
   satiety?: number;
   section?: string;
+  sniperUpdateRate?: boolean;
   spawnIni?: ini_file | null;
   upgrades?: Array<string>;
 }
@@ -168,6 +169,7 @@ export class MockGameObject implements game_object {
   public objectRank: number;
   public objectSatiety: number;
   public objectSection: string;
+  public objectSniperUpdateRate: boolean;
   public objectSpawnIni: ini_file | null;
   public objectUpgradesSet: Set<string>;
   public objectVisual: string = "object_visual_name";
@@ -376,7 +378,13 @@ export class MockGameObject implements game_object {
 
   public skip_transfer_enemy = jest.fn() as unknown as jest.MockedFunction<game_object["skip_transfer_enemy"]>;
 
-  public sniper_update_rate = jest.fn() as unknown as jest.MockedFunction<game_object["sniper_update_rate"]>;
+  public sniper_update_rate = jest.fn((value?: boolean): boolean | void => {
+    if (value === undefined) {
+      return this.objectSniperUpdateRate;
+    }
+
+    this.objectSniperUpdateRate = value;
+  }) as unknown as jest.MockedFunction<game_object["sniper_update_rate"]>;
 
   public switch_to_trade = jest.fn() as unknown as jest.MockedFunction<game_object["switch_to_trade"]>;
 
@@ -846,6 +854,7 @@ export class MockGameObject implements game_object {
     this.objectPosition = config.position ?? MockVector.mock(0.25, 0.25, 0.25);
     this.objectRank = config.rank ?? 0;
     this.objectSection = config.section ?? "section";
+    this.objectSniperUpdateRate = config.sniperUpdateRate ?? false;
     this.objectSpawnIni = config.spawnIni === undefined ? MockIniFile.mock("spawn.ini") : config.spawnIni;
     this.objectUpgradesSet = new Set(config.upgrades ?? []);
 
