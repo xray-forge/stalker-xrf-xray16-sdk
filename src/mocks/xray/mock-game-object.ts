@@ -1,8 +1,18 @@
 import { jest } from "@jest/globals";
-import type { CHelicopter, game_object, ini_file, TXR_callback, TXR_class_id, TXR_SightType, vector } from "xray16";
+import type {
+  CCar,
+  CHelicopter,
+  game_object,
+  ini_file,
+  TXR_callback,
+  TXR_class_id,
+  TXR_SightType,
+  vector,
+} from "xray16";
 
 import { MockActionPlanner } from "./mock-action-planner";
 import { MockAnim } from "./mock-anim";
+import { type IMockCCarConfig, MockCCar } from "./mock-car";
 import { mockClsid } from "./mock-clsid";
 import { mockConfig } from "./mock-config";
 import { ACTOR_ID } from "./mock-constants";
@@ -87,6 +97,23 @@ export class MockGameObject implements game_object {
 
     jest.spyOn(object, "clsid").mockImplementation(() => mockClsid.helicopter as TXR_class_id);
     jest.spyOn(object, "get_helicopter").mockImplementation(() => helicopter);
+
+    return object.asGameObject();
+  }
+
+  /**
+   * Create a game object backed by a car, with `clsid` and `get_car` wired to a {@link MockCCar} instance.
+   *
+   * @param config - Configuration of the game object mock.
+   * @param carConfig - Configuration of the attached car mock.
+   * @returns Game object acting as a car holder.
+   */
+  public static mockCar(config: IMockGameObjectConfig = {}, carConfig: IMockCCarConfig = {}): game_object {
+    const object: MockGameObject = new MockGameObject(config);
+    const car: CCar = MockCCar.mock(carConfig);
+
+    jest.spyOn(object, "clsid").mockImplementation(() => mockClsid.car as TXR_class_id);
+    jest.spyOn(object, "get_car").mockImplementation(() => car);
 
     return object.asGameObject();
   }

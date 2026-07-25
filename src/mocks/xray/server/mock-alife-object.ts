@@ -237,9 +237,17 @@ export class MockAlifeObject extends MockLuabindClass implements cse_alife_objec
 
   public alive = jest.fn(() => this.objectAlive);
 
-  public update = jest.fn();
-
   public clear_smart_terrain = jest.fn();
+
+  /**
+   * Declared on the prototype rather than as an own `jest.fn()` field.
+   *
+   * @remarks
+   * Server objects override `update` and call `super.update()`. An own instance field is installed by this
+   * constructor before the subclass body runs, so it would shadow the subclass override entirely and leave
+   * `super.update` undefined. Spy on it with `jest.spyOn(object, "update")` when call assertions are needed.
+   */
+  public update(): void {}
 
   public UPDATE_Write(packet: net_packet): void {
     packet.w_stringZ(`update_write_from_${this.constructor.name}`);

@@ -1,28 +1,19 @@
 import { jest } from "@jest/globals";
-import type {
-  CUIButton,
-  CUIFrameLineWnd,
-  CUIFrameWindow,
-  CUIListBox,
-  CUIListBoxItem,
-  CUIListWnd,
-  CUIProgressBar,
-  CUIWindow,
-  CScriptXmlInit,
-  CUISleepStatic,
-  CUIVersionList,
-  UIHint,
-} from "xray16";
+import type { CUIButton, CUIListBox, CUIListBoxItem, CUIWindow, CScriptXmlInit, CUISleepStatic } from "xray16";
 
 import { MockCServerList } from "./mock-cserver-list";
 import { MockCUI3tButton } from "./mock-cui-3t-button";
 import { MockCUICheckButton } from "./mock-cui-check-button";
 import { MockCUIComboBox } from "./mock-cui-combo-box";
 import { MockCUIEditBox } from "./mock-cui-edit-box";
+import { MockCUIFrameLineWnd } from "./mock-cui-frame-line-window";
+import { MockCUIFrameWindow } from "./mock-cui-frame-window";
 import { MockCUIListBox } from "./mock-cui-list-box";
+import { MockCUIListWnd } from "./mock-cui-list-wnd";
 import { MockCUIMapInfo } from "./mock-cui-map-info";
 import { MockCUIMapList } from "./mock-cui-map-list";
 import { MockCUIMMShniaga } from "./mock-cui-mm-shniaga";
+import { MockCUIProgressBar } from "./mock-cui-progress-bar";
 import { MockCUIScrollView } from "./mock-cui-scroll-view";
 import { MockCUISpinFlt } from "./mock-cui-spin-flt";
 import { MockCUISpinNum } from "./mock-cui-spin-num";
@@ -31,7 +22,9 @@ import { MockCUIStatic } from "./mock-cui-static";
 import { MockCUITabControl } from "./mock-cui-tab-control";
 import { MockCUITextWnd } from "./mock-cui-text-wnd";
 import { MockCUITrackBar } from "./mock-cui-track-bar";
+import { MockCUIVersionList } from "./mock-cui-version-list";
 import { MockCUIWindow } from "./mock-cui-window";
+import { MockUIHint } from "./mock-ui-hint";
 
 /**
  * Mock xml file with forms sources.
@@ -64,17 +57,17 @@ export class MockCScriptXmlInit implements CScriptXmlInit {
   ) => CUIListBox<T>;
   public InitEditBox = jest.fn(() => MockCUIEditBox.mock());
   public InitLabel = jest.fn(() => MockCUIStatic.mock());
-  public InitList = jest.fn(() => MockCUIWindow.mock() as unknown as CUIListWnd);
+  public InitList = jest.fn(() => MockCUIListWnd.mock());
   public InitScrollView = jest.fn(() => MockCUIScrollView.mock());
   public InitSpinNum = jest.fn(() => MockCUISpinNum.mock());
   public InitSpinText = jest.fn(() => MockCUISpinText.mock());
   public InitMapList = jest.fn(() => MockCUIMapList.mock());
   public InitMapInfo = jest.fn(() => MockCUIMapInfo.mock());
   public InitTrackBar = jest.fn(() => MockCUITrackBar.mock());
-  public InitFrame = jest.fn(() => MockCUIWindow.mock() as unknown as CUIFrameWindow);
-  public InitFrameLine = jest.fn(() => MockCUIWindow.mock() as unknown as CUIFrameLineWnd);
+  public InitFrame = jest.fn(() => MockCUIFrameWindow.mock());
+  public InitFrameLine = jest.fn(() => MockCUIFrameLineWnd.mock());
   public InitKeyBinding = jest.fn(() => MockCUIWindow.mock());
-  public InitProgressBar = jest.fn(() => MockCUIWindow.mock() as unknown as CUIProgressBar);
+  public InitProgressBar = jest.fn(() => MockCUIProgressBar.mock());
   public InitTextWnd = jest.fn(() => MockCUITextWnd.mock());
   public InitMPPlayerName = jest.fn(() => MockCUIEditBox.mock());
   public InitCDkey = jest.fn(() => MockCUIEditBox.mock());
@@ -82,7 +75,7 @@ export class MockCScriptXmlInit implements CScriptXmlInit {
   public InitSpinFlt = jest.fn(() => MockCUISpinFlt.mock());
   public InitServerList = jest.fn(() => MockCServerList.mock());
   public InitSleepStatic = jest.fn(() => MockCUIStatic.mock() as unknown as CUISleepStatic);
-  public InitVerList = jest.fn(() => MockCUIWindow.mock() as unknown as CUIVersionList);
-  public InitHint = jest.fn(() => MockCUIWindow.mock() as unknown as UIHint);
+  public InitVerList = jest.fn(() => MockCUIVersionList.mock());
+  public InitHint = jest.fn(() => MockUIHint.mock());
   public InitAutoStaticGroup = jest.fn();
 }
