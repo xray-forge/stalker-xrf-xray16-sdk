@@ -22,6 +22,8 @@ import {
 // Direct re-exports of the mock classes/objects under their engine global names.
 export {
   MockCALifeSmartTerrainTask as CALifeSmartTerrainTask,
+  MockCCar as CCar,
+  MockCEnvironment as CEnvironment,
   MockCGameFont as CGameFont,
   MockCGameTask as CGameTask,
   MockCHelicopter as CHelicopter,
@@ -112,7 +114,9 @@ export {
   MockTorridZone as cse_torrid_zone,
   MockZoneVisual as cse_zone_visual,
   MockDangerObject as danger_object,
+  MockClientSpawnManager as client_spawn_manager,
   MockEffector as effector,
+  MockEffectorParams as effector_params,
   MockEntityAction as entity_action,
   MockFlags32 as flags32,
   mockGameInterface as game,
@@ -133,6 +137,7 @@ export {
   MockPatrol as patrol,
   MockPhysicsJoint as physics_joint,
   MockPhysicsShell as physics_shell,
+  MockPhysicsWorld as physics_world,
   MockProfile as profile,
   MockProfileTimer as profile_timer,
   MockPropertiesHelper as properties_helper,
