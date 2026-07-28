@@ -14,6 +14,7 @@ export { mockJit } from "./lua/mock-lua-jit";
 export { mockLfs } from "./lua/mock-lua-lfs";
 export { mockMarshal } from "./lua/mock-lua-marshal";
 export { mockMath } from "./lua/mock-lua-math";
+export { mockPcall } from "./lua/mock-lua-pcall";
 export { mockRange } from "./lua/mock-lua-range";
 export { mockString } from "./lua/mock-lua-string";
 export { mockTable } from "./lua/mock-lua-table";

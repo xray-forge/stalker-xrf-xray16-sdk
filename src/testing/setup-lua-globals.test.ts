@@ -1,5 +1,15 @@
 import { describe, expect, it } from "@jest/globals";
-import { MockLuaMap, MockLuaTable, mockLfs, mockMarshal, mockMath, mockString, mockTable } from "xray16/mocks";
+import {
+  MockLuaMap,
+  MockLuaTable,
+  mockLfs,
+  mockMarshal,
+  mockMath,
+  mockString,
+  mockTable,
+  mockPcall,
+  mockRange,
+} from "xray16/mocks";
 
 import { setupLuaGlobals } from "./setup-lua-globals";
 
@@ -19,7 +29,9 @@ describe("setupLuaGlobals", () => {
     expect(target.lfs).toBe(mockLfs);
     expect(target.marshal).toBe(mockMarshal);
 
+    expect(typeof target.pcall).toBe("function");
     expect(typeof target.$range).toBe("function");
+    expect(typeof target.$multi).toBe("function");
     expect((target.$multi as (...args: Array<unknown>) => Array<unknown>)(1, 2)).toEqual([1, 2]);
     expect(typeof target.type).toBe("function");
     expect(() => (target.error as (message: string) => never)("boom")).toThrow("boom");

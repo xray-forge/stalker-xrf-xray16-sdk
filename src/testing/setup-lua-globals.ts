@@ -2,8 +2,8 @@ import type * as XrayMocks from "xray16/mocks";
 
 /**
  * Inject the Lua and optional OpenXRay runtime globals that X-Ray script code relies on (`string`, `table`,
- * `math`, `lfs`, `marshal`, `LuaTable`, `$range`, `error`, and related helpers) onto `globalThis`, backed by
- * `xray16/mocks`.
+ * `math`, `lfs`, `marshal`, `LuaTable`, `$range`, `error`, `pcall`, and related helpers) onto `globalThis`,
+ * backed by `xray16/mocks`.
  *
  * Call once per test file. A Jest `setupFiles` entry is the usual place, and {@link createJestConfig}
  * wires it there automatically. Re-invoking is safe (it just re-assigns the globals).
@@ -43,4 +43,5 @@ export function setupLuaGlobals(): void {
   target.error = jest.fn((message: string): never => {
     throw new Error(message);
   });
+  target.pcall = jest.fn(mocks.mockPcall);
 }
